@@ -20,7 +20,7 @@ import groovy.transform.ToString
 import groovy.transform.TupleConstructor
 
 /**
- * The class Option for Groovy.
+ * The class Option for Groovy inspired from Scala.
  */
 abstract class Option<T> implements Iterable<T> {
     static <A> Option<A> of(A o) {
