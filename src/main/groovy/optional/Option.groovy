@@ -15,6 +15,8 @@
  */
 package optional
 
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
 import groovy.transform.TupleConstructor
 
 /**
@@ -39,8 +41,10 @@ abstract class Option<T> implements Iterable<T> {
 }
 
 @TupleConstructor
+@EqualsAndHashCode
+@ToString
 class Some<T> extends Option<T> {
-    T o
+    T m_O
 
     @Override
     <B extends T> Option<T> orElse(Closure<B> c) {
@@ -49,24 +53,24 @@ class Some<T> extends Option<T> {
 
     @Override
     <B extends T> T getOrElse(Closure<B> c) {
-        return o
+        return m_O
     }
 
     @Override
     <B> Option<B> collect(Closure<B> c) {
-        return of(c(o))
+        return of(c(m_O))
     }
 
     @Override
     Option<T> each(Closure c) {
-        c(o)
+        c(m_O)
         this
     }
 
     @Override
     Iterator<T> iterator() {
         return new Iterator<T>() {
-            def one = o
+            def one = m_O
 
             @Override
             boolean hasNext() {
@@ -87,6 +91,8 @@ class Some<T> extends Option<T> {
     }
 }
 
+@EqualsAndHashCode
+@ToString
 class None<T> extends Option<T> {
 
     private None() {}

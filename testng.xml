@@ -1,0 +1,7 @@
+<suite name="Groovy Optional Test Suite" verbose="1" parallel="methods" thread-count="20">
+    <test name="All">
+        <classes>
+            <class name="optional.OptionTestNG"/>
+        </classes>
+    </test>
+</suite>
