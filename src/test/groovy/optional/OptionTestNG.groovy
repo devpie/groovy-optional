@@ -56,6 +56,25 @@ class OptionTestNG {
         }
     }
 
+    @Test
+    void testOtherMethods() {
+        assertEquals(
+                Option.of(5).find { it < 10 },
+                5
+        )
+        assertEquals(
+                Option.of(5).find { it < 5 },
+                null
+        )
+        assertEquals(
+                Option.of("test").findAll { it == 5 },
+                []
+        )
+        assertEquals(
+                Option.of("test").findAll { it == "test" },
+                ["test"]
+        )
+    }
 
     @DataProvider(name = "data", parallel = true)
     Object[][] provide() {
