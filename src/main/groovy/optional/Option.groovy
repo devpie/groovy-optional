@@ -31,6 +31,10 @@ abstract class Option<T> implements Iterable<T> {
         }
     }
 
+    abstract T get()
+
+    abstract boolean isDefined()
+
     abstract <B extends T> Option<B> orElse(Closure<B> c)
 
     abstract <B extends T> B getOrElse(Closure<B> c)
@@ -47,13 +51,23 @@ class Some<T> extends Option<T> {
     T m_O
 
     @Override
+    T get() {
+        m_O
+    }
+
+    @Override
+    boolean isDefined() {
+        true
+    }
+
+    @Override
     <B extends T> Option<T> orElse(Closure<B> c) {
-        return this
+        this
     }
 
     @Override
     <B extends T> T getOrElse(Closure<B> c) {
-        return m_O
+        m_O
     }
 
     @Override
@@ -69,7 +83,7 @@ class Some<T> extends Option<T> {
 
     @Override
     Iterator<T> iterator() {
-        return new Iterator<T>() {
+        new Iterator<T>() {
             def one = m_O
 
             @Override
@@ -91,7 +105,6 @@ class Some<T> extends Option<T> {
     }
 }
 
-@EqualsAndHashCode
 @ToString
 class None<T> extends Option<T> {
 
@@ -100,18 +113,28 @@ class None<T> extends Option<T> {
     static None INSTANCE = new None()
 
     @Override
+    T get() {
+        throw new NoSuchElementException("None.get")
+    }
+
+    @Override
+    boolean isDefined() {
+        false
+    }
+
+    @Override
     <B extends T> Option<B> orElse(Closure<B> c) {
-        return of(c())
+        of(c())
     }
 
     @Override
     <B extends T> B getOrElse(Closure<B> c) {
-        return c()
+        c()
     }
 
     @Override
     <B> Option<B> collect(Closure<B> c) {
-        return this
+        this
     }
 
     @Override
@@ -121,7 +144,7 @@ class None<T> extends Option<T> {
 
     @Override
     Iterator<T> iterator() {
-        return new Iterator<T>() {
+        new Iterator<T>() {
             @Override
             boolean hasNext() {
                 return false
