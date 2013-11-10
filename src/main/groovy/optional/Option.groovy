@@ -44,11 +44,11 @@ abstract class Option<T> implements Iterable<T> {
     abstract Option<T> each(Closure c)
 }
 
-@TupleConstructor
-@EqualsAndHashCode
-@ToString
+@TupleConstructor(includeFields = true)
+@EqualsAndHashCode(includeFields = true)
+@ToString(includeFields = true)
 class Some<T> extends Option<T> {
-    T m_O
+    private final T m_O
 
     @Override
     T get() {
