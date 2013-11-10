@@ -95,7 +95,7 @@ class Some<T> extends Option<T> {
             Object next() {
                 def ret = one
                 one = null
-                return ret
+                ret
             }
 
             @Override
@@ -147,12 +147,12 @@ class None<T> extends Option<T> {
         new Iterator<T>() {
             @Override
             boolean hasNext() {
-                return false
+                false
             }
 
             @Override
             Object next() {
-                return null
+                null
             }
 
             @Override
